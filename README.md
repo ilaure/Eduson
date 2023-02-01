@@ -2,7 +2,6 @@
 ## Различные файлы для уроков в Eduson:
 ### DockerForTesting:
 #### [Для локального запуска Unit-теста (main.py) и сборки образа из dockerfile](DockerForTesting/unitTest/):
-Основные команды для локального запуска:  
 Проверьте, что docker доступен:  
 ```
 docker
