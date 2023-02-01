@@ -20,7 +20,7 @@ def test_isupper():
 
 
 def test_lower():
-    assert 'FOO'.lower() == 'fo0'
+    assert 'FOO'.lower() == 'foo'
 
 
 def test_islower():
