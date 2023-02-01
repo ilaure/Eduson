@@ -36,7 +36,15 @@ docker run --net testnet --rm -p 3000:3000 --name testweb bkimminich/juice-shop
 ```
 docker build -t autotest_web_container .
 ```
-Находясь в той же директории где test.py, запустим контейнер (для Windows ${PWD}, для Mac или Linux $(pwd)):  
+Находясь в той же директории где test.py, запустим контейнер (ниже используйте для Windows `${PWD}`, для Mac или Linux `$(pwd)`):  
 ```
-docker run -it -v ${PWD}:/user/test/ -w /user/test/ autotest_web_container python test.py
+docker run -it -v ${PWD}:/user/test/ -w /user/test/ --net testnet autotest_web_container python test.py
+```
+Чтобы узнать какие docker сети созданы:  
+```
+docker network ls
+```
+Чтобы узнать данные по конкретной docker сети (например, "testnet"):  
+```
+docker network inspect testnet
 ```
