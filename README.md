@@ -32,7 +32,7 @@ docker network create testnet
 ```
 docker run --net testnet --rm -p 3000:3000 --name testweb bkimminich/juice-shop
 ```
-Находясь в той же директории где dockerfile, собрать образ (например, с именем "autotest_web_container"):  
+Находясь в той же директории где [dockerfile для тестов](https://github.com/ilaure/Eduson/blob/main/DockerForTesting/juiceShopTest/dockerfile), собрать образ (например, с именем "autotest_web_container"):  
 ```
 docker build -t autotest_web_container .
 ```
@@ -47,4 +47,16 @@ docker network ls
 Чтобы узнать данные по конкретной docker сети (например, "testnet"):  
 ```
 docker network inspect testnet
+```
+Чтобы быстро получить IPv4 адрес для контейнера запущенного в нужной docker сети (например, "testnet"):  
+```
+network inspect testnet | find "IPv4Address"
+```
+Полученный адрес нужно указать [в файле test.py](https://github.com/ilaure/Eduson/blob/main/DockerForTesting/juiceShopTest/test.py) вместо localhost, исходная строчка:  
+```
+link = "http://localhost:3000/#/"
+```
+Заменить например на:
+```
+link = "http://172.19.0.2:3000/#/"
 ```
