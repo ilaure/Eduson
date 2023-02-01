@@ -1,0 +1,13 @@
+FROM python:3.11-alpine
+
+LABEL "name"="test"
+
+WORKDIR ./usr/test
+
+COPY . .
+
+RUN apk update && apk upgrade && apk add bash
+
+RUN pip install pytest
+
+CMD pytest -s -v main.py
