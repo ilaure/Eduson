@@ -28,7 +28,7 @@ docker pull bkimminich/juice-shop
 ```
 docker network create testnet
 ```
-Запустите контейнер (например, с именем "testweb") с сайтом juice-shop:  
+Запустите контейнер (например, с именем "testweb") с сайтом [juice-shop](https://github.com/juice-shop/juice-shop) образ на [hub.docker.com](https://hub.docker.com/r/bkimminich/juice-shop/):  
 ```
 docker run --net testnet --rm -p 3000:3000 --name testweb bkimminich/juice-shop
 ```
