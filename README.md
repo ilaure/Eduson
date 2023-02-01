@@ -27,7 +27,7 @@ docker pull bkimminich/juice-shop
 ```
 docker network create testnet
 ```
-Запустите контейнер (например, с именем "testweb") с сайтом [juice-shop](https://github.com/juice-shop/juice-shop) образ на [hub.docker.com](https://hub.docker.com/r/bkimminich/juice-shop/):  
+Запустите контейнер (например, с именем "testweb") с сайтом [juice-shop](https://github.com/juice-shop/juice-shop) образ на [hub.docker.com](https://hub.docker.com/r/bkimminich/juice-shop/) - нужно запускать в отдельном окне и не закрывать до окончания тестирования:  
 ```
 docker run --net testnet --rm -p 3000:3000 --name testweb bkimminich/juice-shop
 ```
@@ -49,13 +49,17 @@ docker network inspect testnet
 ```
 Чтобы быстро получить IPv4 адрес для контейнера запущенного в нужной docker сети (например, "testnet"):  
 ```
-network inspect testnet | find "IPv4Address"
+docker network inspect testnet | find "IPv4Address"
 ```
-Полученный адрес нужно указать [в файле test.py](https://github.com/ilaure/Eduson/blob/main/DockerForTesting/juiceShopTest/test.py) вместо localhost, исходная строчка:  
+Полученный адрес нужно указать [в файле test.py](https://github.com/ilaure/Eduson/blob/main/DockerForTesting/juiceShopTest/test.py) вместо localhost, исходная строчка: 
 ```
 link = "http://localhost:3000/#/"
 ```
 Заменить например на:
 ```
 link = "http://172.19.0.2:3000/#/"
+```
+И снова находясь в той же директории где test.py, запустим контейнер (ниже используйте для Windows `${PWD}`, для Mac или Linux `$(pwd)`):  
+```
+docker run -it -v ${PWD}:/user/test/ -w /user/test/ --net testnet autotest_web_container python test.py
 ```
