@@ -54,3 +54,7 @@ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 docker exec -it jenkins-blueocean bash
 ```
+#### Локально соберём находясь в директории с файлами образ dockerfilejenkinsagent:
+```
+docker build -t dockerfilejenkinsagent -f DockerfileJenkinsAgent .
+```
