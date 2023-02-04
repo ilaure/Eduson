@@ -6,6 +6,9 @@ pipeline {
     stage("Build") {
       steps {
         sh """
+          pwd
+          ls -la
+          echo "WORKSPACE is: ${WORKSPACE}"
           docker build -t DockerfilePythonAlpineSimple -f JenkinsForTesting/DockerfilePythonAlpineSimple .
         """
       }
