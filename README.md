@@ -7,6 +7,8 @@
 docker
 ```
 ![docker](Images/docker.JPG)  
+Если нет, то нужно установить: [https://www.docker.com/](https://www.docker.com/)  
+  
 Проверьте, какие образы сейчас есть:  
 ```
 docker images
