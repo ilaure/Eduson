@@ -8,6 +8,7 @@ pipeline { // определение декларативного pipeline
     }
     stage('Start python3 python-hello.py') { // второй stage
       steps {
+        echo "${WORKSPACE}"
         sh 'python3 python-hello.py'
       }
     }
