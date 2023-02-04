@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+	triggers {
+		pollSCM '*/2 * * * *' // каждые 2 мин. общается в Git и проверяет изменился ли файл, если да, то запустит stages
+	}
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building'
+                echo "WORKSPACE is: ${WORKSPACE}"
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing'
+            }
+        }
+        stage('Publish') {
+            steps {
+                echo 'Publishing'
+                sh ''
+            }
+        }
+    }
+}
