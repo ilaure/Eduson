@@ -8,8 +8,8 @@ pipeline { // определение декларативного pipeline
     }
     stage('Start python3 python-hello.py') { // второй stage
       steps {
-        echo "${WORKSPACE}"
-        sh 'python3 python-hello.py'
+        echo "WORKSPACE is: ${WORKSPACE}"
+        sh 'JenkinsForTesting/python3 python-hello.py'
       }
     }
   }
