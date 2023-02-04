@@ -58,3 +58,15 @@ docker exec -it jenkins-blueocean bash
 ```
 docker build -t dockerfilejenkinsagent -f DockerfileJenkinsAgent .
 ```
+#### Добавление Jenkins агента по SSH:
+Действуем по рекомендации https://www.jenkins.io/doc/book/using/using-agents/  
+Генерируем ssh ключи:
+```
+ssh-keygen -f C:\Eduson\JenkinsForTesting\jenkins_agent_key\id_rsa
+```
+В UI Jenkins Manage Credentials > Add Credentials  
+Локально запускаем докер контейнер с ssh-agent:jdk11:  
+```
+docker run -d --rm --name=agent1 --network jenkins -p 22:22 -e "JENKINS_AGENT_SSH_PUBKEY=[your-public-key]" jenkins/ssh-agent:jdk11
+```
+В UI Jenkins Manage Jenkins > Manage Nodes and clouds добавляем агента.  
