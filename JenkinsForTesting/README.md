@@ -30,14 +30,14 @@ docker run --name jenkins-socat -d --restart=always -p 4444:2375 ^
   --network jenkins ^
   -v /var/run/docker.sock:/var/run/docker.sock ^
   alpine/socat ^
-  tcp-listen:2375,fork,reuseaddr ^
+  tcp-listen:4444,fork,reuseaddr ^
   unix-connect:/var/run/docker.sock
 ```
-#### Используя Dockerfile из репозитория запустить сборку:
+#### Используя Dockerfile из репозитория соберём образ:
 ```
 docker build -t myjenkins-blueocean:2.389 .
 ```
-#### Запустить контейнер:
+#### Запустить контейнер c Jenkins Blueocean:
 ```
 docker run --name jenkins-blueocean --restart=on-failure --detach ^
   --network jenkins --env DOCKER_HOST=tcp://docker:2376 ^
@@ -49,4 +49,8 @@ docker run --name jenkins-blueocean --restart=on-failure --detach ^
 #### Переходим на http://localhost:8080/ и нам нужно предоставить пароль из /var/jenkins_home/secrets/initialAdminPassword, для этого:
 ```
 docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
+```
+#### Можно открыть bash в Jenkins:
+```
+docker exec -it jenkins-blueocean bash
 ```
