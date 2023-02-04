@@ -1,12 +1,14 @@
 # Eduson
 ## Различные файлы для уроков в Eduson:
 ### DockerForTesting:
-#### [Для локального запуска Unit-теста (main.py) и сборки образа из dockerfile](DockerForTesting/unitTest/):
+#### [Для локального запуска Unit-теста (main.py) и сборки образа из dockerfile](unitTest/):
 Проверьте, что docker доступен:  
 ```
 docker
 ```
 ![docker](images/docker.JPG)  
+Если Docker не установлен, нужно поставить [https://www.docker.com/](https://www.docker.com/)  
+  
 Проверьте, какие образы сейчас есть:  
 ```
 docker images
@@ -22,7 +24,7 @@ docker build -t autotestlocal .
 docker run --name autotestlocal_container -it autotestlocal
 ```
 ![docker](images/docker-run-autotestlocal_container.JPG)  
-#### [Для локального запуска OWASP Juice Shop и примера одного теста (test.py) из dockerfile](DockerForTesting/juiceShopTest/):
+#### [Для локального запуска OWASP Juice Shop и примера одного теста (test.py) из dockerfile](juiceShopTest/):
 Скачайте образ сайта OWASP Juice Shop:  
 ```
 docker pull bkimminich/juice-shop
