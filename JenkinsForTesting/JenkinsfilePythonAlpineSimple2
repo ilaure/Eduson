@@ -9,14 +9,14 @@ pipeline {
           pwd
           ls -la
           echo "WORKSPACE is: ${WORKSPACE}"
-          docker build -t DockerfilePythonAlpineSimple -f JenkinsForTesting/DockerfilePythonAlpineSimple .
+          docker build -t dockerfilepythonalpinesimple -f JenkinsForTesting/DockerfilePythonAlpineSimple .
         """
       }
     }
     stage("Run") {
       steps {
         sh """
-          docker run --rm DockerfilePythonAlpineSimple
+          docker run --rm dockerfilepythonalpinesimple
         """
       }
     }
