@@ -24,6 +24,15 @@ docker run --name jenkins-docker --rm --detach ^
   --publish 2376:2376 ^
   docker:dind
 ```
+#### Чтобы запустить Jenkins агента внутри Docker, потребуется ещё один образ (https://hub.docker.com/r/alpine/socat/):
+```
+docker run --name jenkins-socat -d --restart=always -p 4444:2375 ^
+  --network jenkins ^
+  -v /var/run/docker.sock:/var/run/docker.sock ^
+  alpine/socat ^
+  tcp-listen:2375,fork,reuseaddr ^
+  unix-connect:/var/run/docker.sock
+```
 #### Используя Dockerfile из репозитория запустить сборку:
 ```
 docker build -t myjenkins-blueocean:2.389 .
