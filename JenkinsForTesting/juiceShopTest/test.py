@@ -16,6 +16,7 @@ class TestTemplate(unittest.TestCase):
         """Get url"""
         parser = argparse.ArgumentParser()
         parser.add_argument('--url', dest='url', type=str, help='Testing url base host')
+        parser.add_argument('--alluredir', dest='alluredir', type=str, help='Alluredir')
         self.args = parser.parse_args()
 
         """Start web driver"""
