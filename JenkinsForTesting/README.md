@@ -37,6 +37,16 @@ docker run --name jenkins-blueocean --restart=on-failure --detach \
   --volume jenkins-docker-certs:/certs/client:ro \
   myjenkins-blueocean:2.389
 ```
+#### Чтобы выполнять команды Docker внутри узлов Jenkins, потребуется ещё один образ docker:dind запустим сразу его:
+```
+docker run --name jenkins-docker --rm --detach ^
+  --privileged --network jenkins --network-alias docker ^
+  --env DOCKER_TLS_CERTDIR=/certs ^
+  --volume jenkins-docker-certs:/certs/client ^
+  --volume jenkins-data:/var/jenkins_home ^
+  --publish 2376:2376 ^
+  docker:dind
+```
 #### Переходим на http://localhost:8080/ и нам нужно предоставить пароль из /var/jenkins_home/secrets/initialAdminPassword, для этого:
 ```
 docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
@@ -74,22 +84,6 @@ Host
 Credentials
 Manually trusted key verification
 ```
-
-<!--
-#### Локально соберём находясь в директории с файлами образ dockerfilejenkinsagent:
-```
-docker build -t dockerfilejenkinsagent -f DockerfileJenkinsAgent .
-```
-#### Чтобы выполнять команды Docker внутри узлов Jenkins, потребуется ещё один образ docker:dind запустим сразу его:
-```
-docker run --name jenkins-docker --rm --detach ^
-  --privileged --network jenkins --network-alias docker ^
-  --env DOCKER_TLS_CERTDIR=/certs ^
-  --volume jenkins-docker-certs:/certs/client ^
-  --volume jenkins-data:/var/jenkins_home ^
-  --publish 2376:2376 ^
-  docker:dind
-```
 #### Чтобы запустить Jenkins агента внутри Docker, потребуется ещё один образ (https://hub.docker.com/r/alpine/socat/):
 ```
 docker run --name jenkins-socat -d --restart=always -p 4444:2375 ^
@@ -98,5 +92,36 @@ docker run --name jenkins-socat -d --restart=always -p 4444:2375 ^
   alpine/socat ^
   tcp-listen:4444,fork,reuseaddr ^
   unix-connect:/var/run/docker.sock
+```
+Затем найдём IP адрес данного контейнера:
+```
+docker inspect jenkins-socat
+```
+Затем в UI Dashboard > Manage Jenkins > Configure Clouds > Docker Cloud details:  
+```
+tcp://<IP>:4444
+Enabled
+Test Connection
+```
+Docker Agent templates:  
+Label and Name docker
+Docker Image jenkins/agent:alpine-jdk11
+Instance Capacity 1
+Only build jobs with label expressions matching this node
+
+#### Запустим проект тестирования сайта juice-shop:
+Запустим в докере:  
+```
+docker run --net jenkins --rm -p 3000:3000 --name testweb bkimminich/juice-shop
+```
+Определим IP сайта:  
+```
+docker inspect testweb
+```
+
+<!--
+#### Локально соберём находясь в директории с файлами образ dockerfilejenkinsagent:
+```
+docker build -t dockerfilejenkinsagent -f DockerfileJenkinsAgent .
 ```
 -->
