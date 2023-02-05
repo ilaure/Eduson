@@ -21,7 +21,7 @@ pipeline {
       steps {
             sh '''cd JenkinsForTesting/juiceShopTestInDocker
               ls -la
-              docker run --tty -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl} --alluredir=allure-result
+              docker run --tty -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl}
             '''
       } 
     }
