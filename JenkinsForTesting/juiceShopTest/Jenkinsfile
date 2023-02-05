@@ -3,9 +3,10 @@ pipeline { // определение декларативного pipeline
   stages { // stages которые будем запускать
     stage('Get python3 version') { // первый stage
       steps {
-        sh 'python3 --version'
-        sh 'pip install --upgrade pip'
-        sh 'pip install pytest && pip install selenium'
+        sh '''python3 --version
+            pip install --upgrade pip
+            pip install pytest && pip install selenium
+            '''
       }
     }
     stage('Start python3 test.py') { // второй stage
