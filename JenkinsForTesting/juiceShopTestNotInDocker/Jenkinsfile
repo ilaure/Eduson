@@ -1,0 +1,16 @@
+pipeline {
+  agent any
+  stages {
+    stage('Build Web') {
+      steps {
+        echo "Web is ready on: ${webSiteUrl}"
+      }
+    }
+    stage('Run Test') {
+      failFast true
+      steps {
+        sh python JenkinsForTesting/juiceShopTestNotInDocker/test.py --url ${webSiteUrl} --alluredir=allure-result
+      }
+    }
+  }
+}
