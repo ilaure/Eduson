@@ -35,7 +35,7 @@ docker run --name jenkins-socat -d --restart=always -p 4444:2375 ^
 ```
 #### Используя Dockerfile из репозитория соберём образ:
 ```
-docker build -t myjenkins-blueocean:2.389 .
+docker build -t myjenkins-blueocean:2.389 -f DockerfileJenkins .
 ```
 #### Запустить контейнер c Jenkins Blueocean:
 ```
