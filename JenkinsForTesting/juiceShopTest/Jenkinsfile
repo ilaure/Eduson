@@ -1,7 +1,12 @@
-pipeline { // определение декларативного pipeline
-  agent any // определение, что будет запущено на любом агенте
-  stages { // stages которые будем запускать
-    stage('Get python3 version') { // первый stage
+pipeline {
+  agent any
+  stages {
+    stage('Build Web') {
+      steps {
+        echo "Web is ready on: ${webSiteUrl}"
+      }
+    }
+	stage('Build Test') {
       steps {
         echo "WORKSPACE is: ${WORKSPACE}"
 		sh '''cd JenkinsForTesting/juiceShopTest
@@ -11,10 +16,11 @@ pipeline { // определение декларативного pipeline
             '''
       }
     }
-    stage('Start python3 test.py') { // второй stage
+    stage('Run Test') {
       steps {
         echo "WORKSPACE is: ${WORKSPACE}"
         sh '''cd JenkinsForTesting/juiceShopTest
+            ls -la
 			docker run -i -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl}
             '''
       }
