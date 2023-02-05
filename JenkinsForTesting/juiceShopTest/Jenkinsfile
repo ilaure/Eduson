@@ -9,21 +9,27 @@ pipeline {
 	stage('Build Test') {
       steps {
         echo "WORKSPACE is: ${WORKSPACE}"
-		sh '''cd JenkinsForTesting/juiceShopTest
-            ls -la
-			docker build -t autotest_web_container .
-            docker images
-            '''
+        sh '''cd JenkinsForTesting/juiceShopTest
+          ls -la
+          docker build -t autotest_web_container .
+          docker images
+        '''
       }
     }
     stage('Run Test') {
       failFast true
       steps {
-        sh '''cd JenkinsForTesting/juiceShopTest
-            ls -la
-			docker run --tty -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl} --alluredir=allure-result
+        script{
+          try{
+            sh '''cd JenkinsForTesting/juiceShopTest
+              ls -la
+              docker run --tty -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl} --alluredir=allure-result
             '''
-		}
-      }
+          } catch (Exception e){
+            currentBuild.result = 'FAILURE'
+          }
+        }
+      } 
+    }
   }
 }
