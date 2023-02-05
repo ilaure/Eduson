@@ -10,17 +10,17 @@ pipeline {
       steps {
         sh 'python3 -m pytest JenkinsForTesting/juiceShopTestNotInDocker/test_ops.py'
       }
-    }
-    post {
-      always {
-        script {
-          allure([
-            includeProperties: false,
-            jdk: '',
-            properties: [],
-            reportBuildPolicy: 'ALWAYS',
-            results: [[path: 'allure-results']]
-          ])
+      post {
+        always {
+          script {
+            allure([
+              includeProperties: false,
+              jdk: '',
+              properties: [],
+              reportBuildPolicy: 'ALWAYS',
+              results: [[path: 'allure-results']]
+            ])
+          }
         }
       }
     }
