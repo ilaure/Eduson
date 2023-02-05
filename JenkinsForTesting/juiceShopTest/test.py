@@ -38,7 +38,7 @@ class TestTemplate(unittest.TestCase):
         try:
             link = self.args.url
             search_string = "Apple Pomace"
-            expected_item_price = "0.89¤"
+            expected_item_price = "0.99¤"
 
             print('Will start browser with link:', link)
 
