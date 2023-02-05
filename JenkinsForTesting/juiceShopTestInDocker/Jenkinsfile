@@ -9,7 +9,7 @@ pipeline {
 	stage('Build Test') {
       steps {
         echo "WORKSPACE is: ${WORKSPACE}"
-        sh '''cd juiceShopTestInDocker/juiceShopTest
+        sh '''cd JenkinsForTesting/juiceShopTestInDocker
           ls -la
           docker build -t autotest_web_container .
           docker images
@@ -19,7 +19,7 @@ pipeline {
     stage('Run Test') {
       failFast true
       steps {
-            sh '''cd juiceShopTestInDocker/juiceShopTest
+            sh '''cd JenkinsForTesting/juiceShopTestInDocker
               ls -la
               docker run --tty -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl} --alluredir=allure-result
             '''
