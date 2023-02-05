@@ -15,7 +15,7 @@ def test_multiply():
 
 
 def test_divide():
-    assert divide(10, 5) == 1
+    assert divide(10, 5) == 2
 
 
 class TestCase(object):
@@ -25,6 +25,8 @@ class TestCase(object):
         ("6*9", 42),
         ("5*5", 25),
         ("50-10", 40),
+        ("40-10", 30),
+        ("100*10", 1000),
     ])
     def tests_in_testCase(self, test_input, expected):
         assert eval(test_input) == expected
