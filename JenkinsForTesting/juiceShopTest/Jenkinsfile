@@ -20,11 +20,14 @@ pipeline {
       failFast true
       steps {
         echo "WORKSPACE is: ${WORKSPACE}"
-        catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+        catchError {
+            build job: 'system-check-flow'
+        }
         sh '''cd JenkinsForTesting/juiceShopTest
             ls -la
 			docker run --tty -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl} --alluredir=allure-result
             '''
+        echo currentBuild.result
 		}
       }
     }
