@@ -7,4 +7,4 @@ RUN apk update
 RUN apk add chromium chromium-chromedriver
 
 RUN pip install --upgrade pip
-RUN pip install pytest && pip install selenium
+RUN pip install pytest && pip install selenium && pip install allure-pytest
