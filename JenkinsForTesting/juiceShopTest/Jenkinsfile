@@ -3,16 +3,20 @@ pipeline { // определение декларативного pipeline
   stages { // stages которые будем запускать
     stage('Get python3 version') { // первый stage
       steps {
-        sh '''python3 --version
-            pip install --upgrade pip
-            pip install pytest && pip install selenium
+        echo "WORKSPACE is: ${WORKSPACE}"
+		sh '''cd JenkinsForTesting\juiceShopTest
+            ls -la
+			docker build -t autotest_web_container .
+            docker images
             '''
       }
     }
     stage('Start python3 test.py') { // второй stage
       steps {
         echo "WORKSPACE is: ${WORKSPACE}"
-        sh "python3 JenkinsForTesting/juiceShopTest/test.py --url ${webSiteUrl}"
+        sh '''cd JenkinsForTesting\juiceShopTest
+			docker run -it -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl}"
+            '''
       }
     }
   }
