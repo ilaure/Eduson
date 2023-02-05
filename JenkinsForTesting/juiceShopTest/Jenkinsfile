@@ -4,7 +4,7 @@ pipeline { // определение декларативного pipeline
     stage('Get python3 version') { // первый stage
       steps {
         echo "WORKSPACE is: ${WORKSPACE}"
-		sh '''cd JenkinsForTesting\juiceShopTest
+		sh '''cd JenkinsForTesting/juiceShopTest
             ls -la
 			docker build -t autotest_web_container .
             docker images
@@ -14,7 +14,7 @@ pipeline { // определение декларативного pipeline
     stage('Start python3 test.py') { // второй stage
       steps {
         echo "WORKSPACE is: ${WORKSPACE}"
-        sh '''cd JenkinsForTesting\juiceShopTest
+        sh '''cd JenkinsForTesting/juiceShopTest
 			docker run -it -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl}"
             '''
       }
