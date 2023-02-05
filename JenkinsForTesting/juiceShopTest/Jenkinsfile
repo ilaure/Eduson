@@ -19,16 +19,10 @@ pipeline {
     stage('Run Test') {
       failFast true
       steps {
-        script{
-          try{
             sh '''cd JenkinsForTesting/juiceShopTest
               ls -la
               docker run --tty -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl} --alluredir=allure-result
             '''
-          } catch (Exception e){
-            currentBuild.result = 'FAILURE'
-          }
-        }
       } 
     }
   }
