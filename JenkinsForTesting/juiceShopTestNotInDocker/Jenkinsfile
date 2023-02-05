@@ -19,8 +19,7 @@ pipeline {
       	   properties: [],
       	   reportBuildPolicy: 'ALWAYS',
       	   results: [[path: 'report']]
-    	    ])
-        }
+    	  ])
       }
     }
   }
