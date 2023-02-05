@@ -18,8 +18,8 @@ pipeline {
     }
     stage('Run Test') {
       steps {
-        options { 
-                catchError(message: "Test failed", stageResult: 'FAIL', buildResult: 'FAIL') 
+        catchError {
+            currentBuild.result = 'FAILURE'
         }
         echo "WORKSPACE is: ${WORKSPACE}"
         sh '''cd JenkinsForTesting/juiceShopTest
