@@ -1,0 +1,16 @@
+pipeline { // определение декларативного pipeline
+  agent any // определение, что будет запущено на любом агенте
+  stages { // stages которые будем запускать
+    stage('Get python3 version') { // первый stage
+      steps {
+        sh 'python3 --version'
+      }
+    }
+    stage('Start python3 test.py') { // второй stage
+      steps {
+        echo "WORKSPACE is: ${WORKSPACE}"
+        sh "python3 JenkinsForTesting/juiceShopTest/test.py --url ${webSiteUrl}"
+      }
+    }
+  }
+}
