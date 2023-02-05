@@ -6,7 +6,7 @@ pipeline {
         echo "Web is ready on: ${webSiteUrl}"
       }
     }
-	stage('Build Test') {
+    stage('Build Test') {
       steps {
         echo "WORKSPACE is: ${WORKSPACE}"
         sh '''cd JenkinsForTesting/juiceShopTestInDocker
