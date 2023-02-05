@@ -14,6 +14,7 @@ docker images
 ```
 docker network create jenkins
 ```
+<!--
 #### Чтобы выполнять команды Docker внутри узлов Jenkins, потребуется ещё один образ docker:dind запустим сразу его:
 ```
 docker run --name jenkins-docker --rm --detach ^
@@ -33,6 +34,7 @@ docker run --name jenkins-socat -d --restart=always -p 4444:2375 ^
   tcp-listen:4444,fork,reuseaddr ^
   unix-connect:/var/run/docker.sock
 ```
+-->
 #### Используя Dockerfile из репозитория соберём образ:
 ```
 docker build -t myjenkins-blueocean:2.389 -f DockerfileJenkins .
