@@ -13,13 +13,12 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing'
-				echo "WORKSPACE is: ${WORKSPACE}"
+                echo "WORKSPACE is: ${WORKSPACE}"
             }
         }
         stage('Publish') {
             steps {
                 echo 'Publishing'
-                sh ''
             }
         }
     }
