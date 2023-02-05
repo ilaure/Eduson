@@ -1,5 +1,5 @@
 import pytest
-from ops import *
+from math_ops import *
 
 
 def test_add():
