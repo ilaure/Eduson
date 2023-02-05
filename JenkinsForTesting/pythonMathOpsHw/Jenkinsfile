@@ -1,0 +1,28 @@
+pipeline {
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        sh 'python3 JenkinsForTesting/pythonMathOps/math_ops.py'
+      }
+    }
+    stage('Run Test') {
+      steps {
+        sh 'python3 -m pytest JenkinsForTesting/pythonMathOps/test_math_ops.py'
+      }
+      post {
+        always {
+          script {
+            allure([
+              includeProperties: false,
+              jdk: '',
+              properties: [],
+              reportBuildPolicy: 'ALWAYS',
+              results: [[path: 'report']]
+            ])
+          }
+        }
+      }
+    }
+  }
+}
