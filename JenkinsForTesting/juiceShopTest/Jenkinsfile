@@ -15,7 +15,7 @@ pipeline { // определение декларативного pipeline
       steps {
         echo "WORKSPACE is: ${WORKSPACE}"
         sh '''cd JenkinsForTesting/juiceShopTest
-			docker run -it -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl}"
+			docker run -it -v $(pwd):/user/test/ -w /user/test/ autotest_web_container python test.py --url ${webSiteUrl}
             '''
       }
     }
