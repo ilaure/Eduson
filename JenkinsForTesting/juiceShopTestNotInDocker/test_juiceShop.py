@@ -1,22 +1,18 @@
-"""
-A simple selenium test example written by python
-"""
 import argparse
-import unittest
+import pytest
 
 from selenium import webdriver
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
 
-class TestTemplate(unittest.TestCase):
+class TestTemplate(pytest.TestCase):
     """Include test cases on a given url"""
 
     def setUp(self):
         """Get url"""
         parser = argparse.ArgumentParser()
         parser.add_argument('--url', dest='url', type=str, help='Testing url base host')
-        parser.add_argument('--alluredir', dest='alluredir', type=str, help='Alluredir')
         self.args = parser.parse_args()
 
         """Start web driver"""
@@ -68,8 +64,3 @@ class TestTemplate(unittest.TestCase):
 
         except Exception as ex:
             self.fail(ex)
-
-
-if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestTemplate)
-    unittest.TextTestRunner(verbosity=2).run(suite)
