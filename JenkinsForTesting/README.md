@@ -129,11 +129,13 @@ tcp://<IP>:4444
 Enabled
 Test Connection
 ```
-Docker Agent templates:  
+Docker Agent templates: 
+```
 Label and Name docker
 Docker Image jenkins/agent:alpine-jdk11
 Instance Capacity 1
 Only build jobs with label expressions matching this node
+```
 
 #### Запустим проект тестирования сайта juice-shop:
 Запустим в докере:  
